@@ -15,10 +15,10 @@ let students = [{
 
 function createRow(student) {
     $('tbody').append(`<tr>
-						<td>` + student.name + `</td>
-						<td>` + student.rno + `</td>
-						<td>` + student.year + `</td>
-						<td>` + student.stream + `</td>
+						<td>${student.name}</td>
+						<td>${student.rno}</td>
+						<td>${student.year}</td>
+						<td>${student.stream}</td>
 						<td><a href="#" onclick="deleteRow($(this))">
 						<i class="fa fa-trash-o fa-lg" aria-hidden="true"></i></a>
 						<span> | </span>
