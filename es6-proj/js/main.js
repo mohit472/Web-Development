@@ -9,7 +9,19 @@ let students = [{
         rno: '1510991658',
         year: '2019',
         stream: 'CSE'
-    }
+    },
+	{
+		name: 'Shivang',
+		rno: '1510991614',
+		year: '2019',
+		stream: 'CSE'
+	},
+	{
+		name: 'Shubham Bansal',
+		rno: '1510991628',
+		year: '2019',
+		stream: 'CSE'
+	}
 ];
 
 
