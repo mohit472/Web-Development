@@ -9,7 +9,7 @@
     <script src="js/main.js"></script>
 </head>
 
-<body onload="getStudentDetails()">
+<body onload="initData()">
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
@@ -18,7 +18,7 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <form class="form-inline" action="index.html" method="post">
+                <form class="form-inline" id="myform">
                     <div class="form-row align-items-center">
                         <div class="col-auto">
                             <input type="text" class="form-control mb-2 mb-sm-0" name="name" placeholder="Name">
@@ -33,10 +33,7 @@
                             <input type="text" class="form-control mb-2 mb-sm-0" name="stream" placeholder="Stream">
                         </div>
                         <div class="col-auto">
-                            <input type="text" class="form-control mb-2 mb-sm-0" name="name" placeholder="Jane Doe">
-                        </div>
-                        <div class="col-auto">
-                            <button class="btn btn-primary">Submit</button>
+                            <a class="btn btn-primary" onclick="addData()">Submit</a>
                         </div>
                     </div>
                 </form>
@@ -45,24 +42,17 @@
         <br>
         <div class="row">
             <div class="col-md-12">
-                <table class="table table-dark">
+                <table class="table table-dark table-hover">
                     <thead>
                         <tr>
-                            <th scope="col">#</th>
                             <th scope="col">Name</th>
                             <th scope="col">Roll No.</th>
                             <th scope="col">Passout Year</th>
                             <th scope="col">Stream</th>
+							<th scope="col">Options</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                            <td>lksnvsn</td>
-                        </tr>
                     </tbody>
                 </table>
             </div>

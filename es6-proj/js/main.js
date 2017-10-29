@@ -1,8 +1,56 @@
-var batch = "UCA2018";
-let batch2 = "UCA2019";
+/*jshint esversion: 6*/
 
-function getStudentDetails() {
-    document.getElementById("username").innerHTML = batch;
+let students = [
+	{
+		name: 'Surya Kant',
+		rno: '1510991666',
+		year: '2019',
+		stream: 'CSE'
+	},
+	{
+		name: 'Sparsh Rana',
+		rno: '1510991658',
+		year: '2019',
+		stream: 'CSE'
+	}
+];
+
+
+function createRow(student){
+	$('tbody').append(`<tr>
+						<td>` + student.name + `</td>
+						<td>` + student.rno + `</td>
+						<td>` + student.year + `</td>
+						<td>` + student.stream + `</td>
+						<td><a href="#" onclick="deleteRow(this)">delete</a>
+						<span> </span>
+						<a href="#" onclick="editRow()">edit</a></td>
+						</tr>`)
 }
 
-["a", "b"].map(name => `${name}!`);
+
+function initData(){
+	for(i=0; i < students.length; i++){
+		createRow(students[i]);
+	}
+}
+
+
+function addData(){
+	let data = {};
+	$.each($('#myform').serializeArray(), function(i, field) {
+	    data[field.name] = field.value;
+	});
+	createRow(data);
+}
+
+
+function deleteRow(o) {
+	let p = o.parentNode.parentNode;
+	p.parentNode.removeChild(p);
+}
+
+
+function editRow(){
+	
+}
