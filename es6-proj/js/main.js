@@ -69,3 +69,25 @@ function deleteRow(element) {
 function editRow() {
 
 }
+
+
+/* This function selects rows to delete by
+ * adding table-danger class to the row.
+ */
+function selectRow($element) {
+	let $tr = $element.parent().parent();
+	$tr.toggleClass('table-danger');
+	let $icon = $element.children();
+	$icon.toggleClass('fa-check fa-times');
+}
+
+
+/* This function calls deleteRow() to delete
+ * multiple selected rows.
+ */
+function deleteSelected() {
+	let $tr = $('tr.table-danger');
+	$tr.each(function(index) {
+		deleteRow($(this).children().children('a:first-child'));
+	});
+}
