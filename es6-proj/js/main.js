@@ -84,6 +84,7 @@ function selectRow($element) {
 	$tr.toggleClass('table-danger');
 	let $icon = $element.children();
 	$icon.toggleClass('fa-check fa-times');
+	toggleDelBtn();
 }
 
 
@@ -95,4 +96,18 @@ function deleteSelected() {
 	$tr.each(function(index) {
 		deleteRow($(this).children().children('a:first-child'));
 	});
+	toggleDelBtn();
+}
+
+
+/* This function toggles the hidden attribute
+ * of delete button.
+ */
+function toggleDelBtn() {
+	if($('tr.table-danger').length) {
+		$('#delbtn').removeAttr('hidden');
+	}
+	else {
+		$('#delbtn').attr('hidden', 'true');
+	}
 }
