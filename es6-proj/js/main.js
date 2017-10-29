@@ -42,6 +42,7 @@ function addData(){
 	    data[field.name] = field.value;
 	});
 	createRow(data);
+	$('#myform')[0].reset();
 }
 
 
@@ -52,5 +53,5 @@ function deleteRow(o) {
 
 
 function editRow(){
-	
+
 }
