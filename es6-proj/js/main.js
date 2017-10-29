@@ -13,6 +13,9 @@ let students = [{
 ];
 
 
+/* This function use ES6 Template Literals.
+ * It creates the row in the HTML DOM.
+ */
 function createRow(student) {
     $('tbody').append(`<tr>
 						<td>${student.name}</td>
@@ -28,13 +31,17 @@ function createRow(student) {
 }
 
 
+/* This function passes the initial students data to createRow() function.
+ */
 function initData() {
-    for (i = 0; i < students.length; i++) {
+    for (let i = 0; i < students.length; i++) {
         createRow(students[i]);
     }
 }
 
 
+/* This function gets user input and creates a data entry.
+ */
 function addData() {
     let data = {};
 	let input = $('#myform').serializeArray();
@@ -47,6 +54,9 @@ function addData() {
 }
 
 
+/* This function uses ES6 findIndex() and arrow function.
+ * It deletes a row form table and that row data from students array.
+ */
 function deleteRow(element) {
     let tr = element.parent().parent();
 	let rno = tr.children('td')[1].textContent;
