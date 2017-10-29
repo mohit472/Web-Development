@@ -26,12 +26,17 @@ function createRow(student) {
 						<i class="fa fa-trash-o fa-lg" aria-hidden="true"></i></a>
 						<span> | </span>
 						<a href="#" onclick="editRow()">
-						<i class="fa fa-pencil fa-lg" aria-hidden="true"></i></a></td>
+						<i class="fa fa-pencil fa-lg" aria-hidden="true"></i></a>
+						<span> | </span>
+						<a href="#" onclick="selectRow($(this))">
+						<i class="fa fa-check fa-lg" aria-hidden="true"></i></a>
+						</td>
 						</tr>`)
 }
 
 
-/* This function passes the initial students data to createRow() function.
+/* This function passes the initial
+ * students data to createRow() function.
  */
 function initData() {
     for (let i = 0; i < students.length; i++) {
@@ -44,9 +49,9 @@ function initData() {
  */
 function addData() {
     let data = {};
-	let input = $('#myform').serializeArray();
-	$.each(input,function(index, object) {
-		data[object.name] = object.value;
+	let $input = $('#myform').serializeArray();
+	$.each($input,function(index, $object) {
+		data[$object.name] = $object.value;
 	});
 	students.push(data);
 	createRow(data);
@@ -57,10 +62,10 @@ function addData() {
 /* This function uses ES6 findIndex() and arrow function.
  * It deletes a row form table and that row data from students array.
  */
-function deleteRow(element) {
-    let tr = element.parent().parent();
-	let rno = tr.children('td')[1].textContent;
-	tr.remove();
+function deleteRow($element) {
+    let $tr = $element.parent().parent();
+	let rno = $tr.children('td')[1].textContent;
+	$tr.remove();
 	let index = students.findIndex(student => student.rno == rno);
 	students.splice(index,1);
 }
