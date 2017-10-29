@@ -51,9 +51,8 @@ function deleteRow(element) {
     let tr = element.parent().parent();
 	let rno = tr.children('td')[1].textContent;
 	tr.remove();
-	for(let i = 0; i < students.length; i++)
-		if(students[i].rno == rno)
-			students.splice(i,1);
+	let index = students.findIndex(student => student.rno == rno);
+	students.splice(index,1);
 }
 
 
