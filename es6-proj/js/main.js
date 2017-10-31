@@ -65,6 +65,8 @@ function addData() {
 	$.each($input,function(index, $object) {
 		data[$object.name] = $object.value;
 	});
+	if(checkEmpty(data) || checkUnique(data))
+		return;
 	students.push(data);
 	createRow(data);
 	$('#myform')[0].reset();
@@ -139,6 +141,11 @@ function editRow($element) {
 			$.each($input,function(index, $object) {
 				data[$object.name] = $object.value;
 			});
+			if(checkEmpty(data))
+				return;
+			if(data[rno] == rno)
+				if(checkUnique(data))
+					return;
 			let index = students.findIndex(student => student.rno == rno);
 			students[index] = data;
 			$tr.children('td:nth-child(1)').html(data.name);
@@ -147,6 +154,7 @@ function editRow($element) {
 			$tr.children('td:nth-child(4)').html(data.stream);
 			swal(
 				'Entry Updated!',
+				'One entry has been successfully updated',
 				'success'
 			)
 		}).catch(swal.noop)
