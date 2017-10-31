@@ -22,19 +22,21 @@
         <div class="row">
             <div class="col-md-12">
                 <form id="myform">
-                    <div class="row">
-                        <div class="col">
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
                             <input type="text" class="form-control" name="name" placeholder="Name">
                         </div>
-                        <div class="col">
+                        <div class="form-group col-md-3">
                             <input type="text" class="form-control" name="rno" placeholder="Roll No.">
                         </div>
-                        <div class="col">
+                        <div class="form-group col-md-3">
                             <input type="text" class="form-control" name="year" placeholder="Passout Year">
                         </div>
-                        <div class="col">
+                        <div class="form-group col-md-3">
                             <input type="text" class="form-control" name="stream" placeholder="Stream">
                         </div>
+					</div>
+					<div class="form-row">
                         <div class="col">
                             <button class="btn btn-primary" onclick="addData()" type="button">Add Data</button>
 							<button id="delbtn" class="btn btn-primary" onclick="deleteSelected()" hidden="true" type="button">Delete Selected</button>
