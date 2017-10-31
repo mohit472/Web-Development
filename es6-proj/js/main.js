@@ -75,11 +75,26 @@ function addData() {
  * It deletes a row form table and that row data from students array.
  */
 function deleteRow($element) {
-    let $tr = $element.parent().parent();
-	let rno = $tr.children('td')[1].textContent;
-	$tr.remove();
-	let index = students.findIndex(student => student.rno == rno);
-	students.splice(index,1);
+	swal({
+		title: 'Are you sure?',
+		text: "You won't be able to revert this!",
+		type: 'warning',
+		showCancelButton: true,
+		confirmButtonColor: '#3085d6',
+		cancelButtonColor: '#d33',
+		confirmButtonText: 'Yes, delete it!'
+		}).then(function () {
+			let $tr = $element.parent().parent();
+			let rno = $tr.children('td')[1].textContent;
+			$tr.remove();
+			let index = students.findIndex(student => student.rno == rno);
+			students.splice(index,1);
+			swal(
+				'Deleted!',
+				'The Entry has been deleted.',
+				'success'
+			)
+	})
 }
 
 
