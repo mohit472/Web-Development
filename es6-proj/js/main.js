@@ -223,3 +223,18 @@ function checkEmpty(data){
 	return false;
 }
 
+
+/* This function checks if data entry is unique
+ * or not and displays alert if it isn't.
+ */
+function checkUnique(data){
+	if(students.find(student => student.rno == data.rno)){
+		swal(
+			'Unable to add!',
+			'Roll No. already exists.',
+			'error'
+		)
+		return true;
+	}
+	return false;
+}
