@@ -203,3 +203,23 @@ function toggleDelBtn() {
 		$('#delbtn').attr('hidden', 'true');
 	}
 }
+
+
+/* This function checks for empty fields and
+ * displays an alert if found.
+ * Use of ES6 for...of loop.
+ */
+function checkEmpty(data){
+	let pairs = Object.entries(data);
+	for(let pair of pairs)
+		if(pair[1] == ''){
+			swal(
+				'Empty fields found!',
+				'There must be no empty fields.',
+				'error'
+			)
+			return true;
+		}
+	return false;
+}
+
