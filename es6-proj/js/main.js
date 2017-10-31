@@ -68,6 +68,11 @@ function addData() {
 	students.push(data);
 	createRow(data);
 	$('#myform')[0].reset();
+	swal(
+		'Added!',
+		'The entry has been added!',
+		'success'
+	)
 }
 
 
