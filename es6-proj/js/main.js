@@ -37,7 +37,7 @@ function createRow(student) {
 						<td><a href="#" onclick="deleteRow($(this))">
 						<i class="fa fa-trash-o fa-lg" aria-hidden="true"></i></a>
 						<span> | </span>
-						<a href="#" onclick="editRow()">
+						<a href="#" onclick="editRow($(this))">
 						<i class="fa fa-pencil fa-lg" aria-hidden="true"></i></a>
 						<span> | </span>
 						<a href="#" onclick="selectRow($(this))">
@@ -97,13 +97,54 @@ function deleteRow($element) {
 				$tr.remove();
 				let index = students.findIndex(student => student.rno == rno);
 				students.splice(index,1);
-			})
+			}).catch(swal.noop)
 	}
 }
 
 
-function editRow() {
-
+/* This function uses a form inside the swal window
+ * to edit the entries in the table.
+ */
+function editRow($element) {
+	let $tr = $element.parent().parent();
+	let name = $tr.children('td')[0].textContent;
+	let rno = $tr.children('td')[1].textContent;
+	let year = $tr.children('td')[2].textContent;
+	let stream = $tr.children('td')[3].textContent;
+	swal({
+		title: 'Edit Student Details :',
+		html:`
+			<form id="edit-form">
+			<input type="text" class="swal2-input" name="name"
+				placeholder="Name" value="${name}">
+			<input type="text" class="swal2-input" name="rno"
+				placeholder="Roll No." value="${rno}">
+			<input type="text" class="swal2-input" name="year"
+				placeholder="Passout Year" value="${year}">
+			<input type="text" class="swal2-input" name="stream"
+				placeholder="Stream" value="${stream}">
+			</form>`,
+		showCancelButton: true,
+		confirmButtonColor: '#3085d6',
+		cancelButtonColor: '#d33',
+		confirmButtonText: 'Update!'
+		}).then(function () {
+			let data = {};
+			let $input = $('#edit-form').serializeArray();
+			$.each($input,function(index, $object) {
+				data[$object.name] = $object.value;
+			});
+			let index = students.findIndex(student => student.rno == rno);
+			students[index] = data;
+			$tr.children('td:nth-child(1)').html(data.name);
+			$tr.children('td:nth-child(2)').html(data.rno);
+			$tr.children('td:nth-child(3)').html(data.year);
+			$tr.children('td:nth-child(4)').html(data.stream);
+			swal(
+				'Entry Updated!',
+				'success'
+			)
+		}).catch(swal.noop)
 }
 
 
@@ -142,7 +183,7 @@ function deleteSelected() {
 				`${$tr.length} entries deleted!`,
 				'success'
 			)
-		})
+		}).catch(swal.noop)
 }
 
 
