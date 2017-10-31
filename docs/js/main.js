@@ -105,10 +105,25 @@ function selectRow($element) {
  */
 function deleteSelected() {
 	let $tr = $('tr.table-danger');
-	$tr.each(function(index) {
-		deleteRow($(this).children().children('a:first-child'));
-	});
-	toggleDelBtn();
+	swal({
+		title: 'Are you sure?',
+		text: `You are about to delete ${$tr.length} entries!`,
+		type: 'warning',
+		showCancelButton: true,
+		confirmButtonColor: '#3085d6',
+		cancelButtonColor: '#d33',
+		confirmButtonText: 'Confirm!'
+		}).then(function () {
+			$tr.each(function(index) {
+				deleteRow($(this).children().children('a:first-child'));
+			});
+			toggleDelBtn();
+			swal(
+				'Deleted!',
+				`${$tr.length} entries deleted!`,
+				'success'
+			)
+		})
 }
 
 
