@@ -30,6 +30,7 @@ let students = [{
  */
 function createRow(student) {
     $('tbody').append(`<tr>
+						<td scope="row"></td>
 						<td>${student.name}</td>
 						<td>${student.rno}</td>
 						<td>${student.year}</td>
@@ -51,9 +52,9 @@ function createRow(student) {
  * students data to createRow() function.
  */
 function initData() {
-    for (let i = 0; i < students.length; i++) {
-        createRow(students[i]);
-    }
+    for(let student of students)
+        createRow(student);
+	serialize();
 }
 
 
@@ -65,10 +66,15 @@ function addData() {
 	$.each($input,function(index, $object) {
 		data[$object.name] = $object.value;
 	});
-	if(checkEmpty(data) || checkUnique(data))
+	data.name = data.name.trim()
+	data.rno = data.rno.trim()
+	data.year = data.year.trim()
+	data.stream = data.stream.trim()
+	if(checkEmpty(data) || validate(data))
 		return;
 	students.push(data);
 	createRow(data);
+	serialize();
 	$('#myform')[0].reset();
 	swal(
 		'Added!',
@@ -104,6 +110,7 @@ function deleteRow($element) {
 				$tr.remove();
 				let index = students.findIndex(student => student.rno == rno);
 				students.splice(index,1);
+				serialize();
 			}).catch(swal.noop)
 	}
 }
@@ -114,22 +121,22 @@ function deleteRow($element) {
  */
 function editRow($element) {
 	let $tr = $element.parent().parent();
-	let name = $tr.children('td')[0].textContent;
-	let rno = $tr.children('td')[1].textContent;
-	let year = $tr.children('td')[2].textContent;
-	let stream = $tr.children('td')[3].textContent;
+	let name = $tr.children('td')[1].textContent;
+	let rno = $tr.children('td')[2].textContent;
+	let year = $tr.children('td')[3].textContent;
+	let stream = $tr.children('td')[4].textContent;
 	swal({
 		title: 'Edit Student Details :',
 		html:`
 			<form id="edit-form">
-			<input type="text" class="swal2-input" name="name"
-				placeholder="Name" value="${name}">
-			<input type="text" class="swal2-input" name="rno"
-				placeholder="Roll No." value="${rno}">
-			<input type="text" class="swal2-input" name="year"
-				placeholder="Passout Year" value="${year}">
-			<input type="text" class="swal2-input" name="stream"
-				placeholder="Stream" value="${stream}">
+				<input type="text" class="swal2-input" name="name"
+					placeholder="Name" value="${name}">
+				<input type="text" class="swal2-input" name="rno"
+					placeholder="Roll No." value="${rno}">
+				<input type="text" class="swal2-input" name="year"
+					placeholder="Passout Year" value="${year}">
+				<input type="text" class="swal2-input" name="stream"
+					placeholder="Stream" value="${stream}">
 			</form>`,
 		showCancelButton: true,
 		confirmButtonColor: '#3085d6',
@@ -144,14 +151,14 @@ function editRow($element) {
 			if(checkEmpty(data))
 				return;
 			if(data[rno] == rno)
-				if(checkUnique(data))
+				if(validate(data))
 					return;
 			let index = students.findIndex(student => student.rno == rno);
 			students[index] = data;
-			$tr.children('td:nth-child(1)').html(data.name);
-			$tr.children('td:nth-child(2)').html(data.rno);
-			$tr.children('td:nth-child(3)').html(data.year);
-			$tr.children('td:nth-child(4)').html(data.stream);
+			$tr.children('td:nth-child(2)').html(data.name);
+			$tr.children('td:nth-child(3)').html(data.rno);
+			$tr.children('td:nth-child(4)').html(data.year);
+			$tr.children('td:nth-child(5)').html(data.stream);
 			swal(
 				'Entry Updated!',
 				'One entry has been successfully updated',
@@ -191,6 +198,7 @@ function deleteSelected() {
 				deleteRow($(this).children().children('a:first-child'));
 			});
 			toggleDelBtn();
+			serialize();
 			swal(
 				'Deleted!',
 				`${$tr.length} entries deleted!`,
@@ -205,10 +213,10 @@ function deleteSelected() {
  */
 function toggleDelBtn() {
 	if($('tr.table-danger').length) {
-		$('#delbtn').removeAttr('hidden');
+		$('#delbtn').removeAttr('disabled');
 	}
 	else {
-		$('#delbtn').attr('hidden', 'true');
+		$('#delbtn').attr('disabled', 'true');
 	}
 }
 
@@ -232,11 +240,29 @@ function checkEmpty(data){
 }
 
 
-/* This function checks if data entry is unique
- * or not and displays alert if it isn't.
+/* This function checks if data entry is unique and valid
+ * and displays alert if it isn't.
  */
-function checkUnique(data){
-	if(students.find(student => student.rno == data.rno)){
+function validate(data){
+	let regex = /^[a-zA-Z .]{2,20}$/;
+	if(!data.name.match(regex) || !data.stream.match(regex)){
+		swal(
+			'Unable to add!',
+			'Invalid Name and/or Stream.',
+			'error'
+		)
+		return true;
+	}
+	else if(isNaN(data.rno) || isNaN(data.year) ||
+	(parseInt(data.year) > 2030 || parseInt(data.year) < 1990)){
+		swal(
+			'Unable to add!',
+			'Invalid Roll No. and/or Year.',
+			'error'
+		)
+		return true;
+	}
+	else if(students.find(student => student.rno == data.rno)){
 		swal(
 			'Unable to add!',
 			'Roll No. already exists.',
@@ -245,4 +271,15 @@ function checkUnique(data){
 		return true;
 	}
 	return false;
+}
+
+
+/* This function serializes the table
+ * entries.
+ */
+function serialize() {
+	let $tr = $('tbody tr');
+	$tr.each(function(index) {
+		$(this).children('td:first-child').html(index+1);
+	});
 }
