@@ -240,7 +240,15 @@ function checkEmpty(data){
  * or not and displays alert if it isn't.
  */
 function checkUnique(data){
-	if(students.find(student => student.rno == data.rno)){
+	if(isNaN(data.rno) || isNaN(data.year)){
+		swal(
+			'Unable to add!',
+			'Roll No. and Year can only be an integer.',
+			'error'
+		)
+		return true;
+	}
+	else if(students.find(student => student.rno == data.rno)){
 		swal(
 			'Unable to add!',
 			'Roll No. already exists.',
