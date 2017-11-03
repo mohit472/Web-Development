@@ -51,9 +51,8 @@ function createRow(student) {
  * students data to createRow() function.
  */
 function initData() {
-    for (let i = 0; i < students.length; i++) {
-        createRow(students[i]);
-    }
+    for(let student of students)
+        createRow(student);
 }
 
 
