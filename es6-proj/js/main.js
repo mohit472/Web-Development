@@ -209,10 +209,10 @@ function deleteSelected() {
  */
 function toggleDelBtn() {
 	if($('tr.table-danger').length) {
-		$('#delbtn').removeAttr('hidden');
+		$('#delbtn').removeAttr('disabled');
 	}
 	else {
-		$('#delbtn').attr('hidden', 'true');
+		$('#delbtn').attr('disabled', 'true');
 	}
 }
 
