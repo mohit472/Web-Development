@@ -66,7 +66,11 @@ function addData() {
 	$.each($input,function(index, $object) {
 		data[$object.name] = $object.value;
 	});
-	if(checkEmpty(data) || checkUnique(data))
+	data.name = data.name.trim()
+	data.rno = data.rno.trim()
+	data.year = data.year.trim()
+	data.stream = data.stream.trim()
+	if(checkEmpty(data) || validate(data))
 		return;
 	students.push(data);
 	createRow(data);
@@ -147,7 +151,7 @@ function editRow($element) {
 			if(checkEmpty(data))
 				return;
 			if(data[rno] == rno)
-				if(checkUnique(data))
+				if(validate(data))
 					return;
 			let index = students.findIndex(student => student.rno == rno);
 			students[index] = data;
@@ -236,14 +240,24 @@ function checkEmpty(data){
 }
 
 
-/* This function checks if data entry is unique
- * or not and displays alert if it isn't.
+/* This function checks if data entry is unique and valid
+ * and displays alert if it isn't.
  */
-function checkUnique(data){
-	if(isNaN(data.rno) || isNaN(data.year)){
+function validate(data){
+	let regex = /^[a-zA-Z .]{2,20}$/;
+	if(!data.name.match(regex) || !data.stream.match(regex)){
 		swal(
 			'Unable to add!',
-			'Roll No. and Year can only be an integer.',
+			'Invalid Name and/or Stream.',
+			'error'
+		)
+		return true;
+	}
+	else if(isNaN(data.rno) || isNaN(data.year) ||
+	(parseInt(data.year) > 2030 || parseInt(data.year) < 1990)){
+		swal(
+			'Unable to add!',
+			'Invalid Roll No. and/or Year.',
 			'error'
 		)
 		return true;
