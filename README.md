@@ -1,8 +1,23 @@
-# ES6 Project
+#MEAN Stack:
+- M -> MongoDB (Database)
+- E -> ExpressJS (Web Services)
+- A -> AngularJS (Front-End)
+- N -> NodeJS (Server)
 
-The project files are inside the es6-proj directory.
+##Angular Setup :
+- `npm i -g @angular/cli`
+- `ng new 'app_name'`
+- `cd 'app_name'`
+- `ng serve` to run the app.
+- [Documentation](https://angular.io/docs)
 
-## Instructions
-
-* Needs Internet connection to run as it uses CDN to fetch all files.
-* Just run the index.html in your browser.
+##Project Setup :
+- `npm init`
+- `npm install --save express`
+- create main `index.js` file.
+- write the express code in `index.js`
+- `node index.js` to run the app.
+- `ng build` to get dist angular project code.
+- copy the contents of `dist/` to `static/`.
+- `nodemon index.js` to run the app in monitor mode.
+- [Documentation](https://expressjs.com/en/starter/installing.html)
