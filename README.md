@@ -1,17 +1,17 @@
-#MEAN Stack:
+# MEAN Stack:
 - M -> MongoDB (Database)
 - E -> ExpressJS (Web Services)
 - A -> AngularJS (Front-End)
 - N -> NodeJS (Server)
 
-##Angular Setup :
+## Angular Setup :
 - `npm i -g @angular/cli`
 - `ng new 'app_name'`
 - `cd 'app_name'`
 - `ng serve` to run the app.
 - [Documentation](https://angular.io/docs)
 
-##Project Setup :
+## Project Setup :
 - `npm init`
 - `npm install --save express`
 - create main `index.js` file.
