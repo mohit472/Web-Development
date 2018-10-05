@@ -1,6 +1,8 @@
 # AngularTourOfHeroes
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.5.
+It is the basic tutorial project for angular. Provided as an exercise in a build along tutorial.
+Follow and build along [here](https://angular.io/tutorial)
 
 ## Development server
 
